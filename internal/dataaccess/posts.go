@@ -14,6 +14,16 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 			Post_Title:    "This is my fifth forum post",
 			Post_Content:  "This is life 5 by one",
 			Parent_Post:   -1,
+
+			Tags: []string{"tag 1", "tag 3"},
+
+			Username: "Bobby Lee One",
+
+			CommentCount: 23,
+
+			Likes:               29,
+			Is_Like_Selected:    true,
+			Is_Dislike_Selected: false,
 		},
 		{
 			Post_ID:       4,
@@ -22,6 +32,34 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 			Post_Title:    "This is my fourth forum post",
 			Post_Content:  "This is life 4 by three",
 			Parent_Post:   -1,
+
+			Tags: []string{"tag 2", "tag 4"},
+
+			Username: "Bobby Lee Three",
+
+			CommentCount: 63,
+
+			Likes:               30,
+			Is_Like_Selected:    false,
+			Is_Dislike_Selected: false,
+		},
+		{
+			Post_ID:       3,
+			User_ID:       2,
+			Post_Datetime: "10 December 13:40",
+			Post_Title:    "This is my Third forum post",
+			Post_Content:  "This is life 3 by two",
+			Parent_Post:   -1,
+
+			Tags: []string{"tag 1", "tag 2", "tag 3", "tag 4", "tag 5"},
+
+			Username: "Bobby Lee Two",
+
+			CommentCount: 14,
+
+			Likes:               15,
+			Is_Like_Selected:    false,
+			Is_Dislike_Selected: true,
 		},
 		{
 			Post_ID:       2,
@@ -30,6 +68,16 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 			Post_Title:    "This is my second forum post",
 			Post_Content:  "This is life 2 by one",
 			Parent_Post:   -1,
+
+			Tags: []string{"tag 2", "tag 1", "tag 3"},
+
+			Username: "Bobby Lee One",
+
+			CommentCount: 7,
+
+			Likes:               44,
+			Is_Like_Selected:    false,
+			Is_Dislike_Selected: false,
 		},
 		{
 			Post_ID:       1,
@@ -38,6 +86,16 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 			Post_Title:    "This is my first forum post",
 			Post_Content:  "This is life 1 by five",
 			Parent_Post:   -1,
+
+			Tags: []string{"tag 4", "tag 2"},
+
+			Username: "Bobby Lee Five",
+
+			CommentCount: 16,
+
+			Likes:               30,
+			Is_Like_Selected:    false,
+			Is_Dislike_Selected: false,
 		},
 	}
 	return posts, nil

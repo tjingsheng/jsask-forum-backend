@@ -7,4 +7,14 @@ type Post struct {
 	Post_Title    string `json:"postTitle"`
 	Post_Content  string `json:"postContent"`
 	Parent_Post   int    `json:""`
+
+	Tags []string `json:"tags"`
+
+	Username string `json:"username"`
+
+	CommentCount int `json:"commentCount"`
+
+	Likes               int  `json:"likes"`
+	Is_Like_Selected    bool `json:"isLikeSelected"`
+	Is_Dislike_Selected bool `json:"isDislikeSelected"`
 }
