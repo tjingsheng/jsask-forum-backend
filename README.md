@@ -14,13 +14,9 @@ As part of CVWO's AY2022/23 committee recruitment, freshmen from the NUS SOC are
 ## Designed and Implemented By
 
 Tan Jing Sheng
-
 A0253492B
-
 First-Year Undergraduate
-
 NUS Computer Science
-
 2022
 
 # CVWO Assignment Sample Golang App
