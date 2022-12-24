@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/CVWO/sample-go-app/internal/api"
-	users "github.com/CVWO/sample-go-app/internal/dataaccess"
-	"github.com/CVWO/sample-go-app/internal/database"
 	"github.com/pkg/errors"
+	"github.com/tjingsheng/jsask-forum-backend/internal/api"
+	users "github.com/tjingsheng/jsask-forum-backend/internal/dataaccess"
+	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 )
 
 const (

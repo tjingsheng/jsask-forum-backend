@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/CVWO/sample-go-app/internal/router"
+	"github.com/tjingsheng/jsask-forum-backend/internal/router"
 )
 
 func main() {

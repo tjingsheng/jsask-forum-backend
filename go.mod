@@ -1,4 +1,4 @@
-module github.com/CVWO/sample-go-app
+module github.com/tjingsheng/jsask-forum-backend
 
 go 1.18
 

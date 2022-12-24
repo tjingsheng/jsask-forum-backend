@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/CVWO/sample-go-app/internal/routes"
 	"github.com/go-chi/chi"
+	"github.com/tjingsheng/jsask-forum-backend/internal/routes"
 )
 
 func Setup() chi.Router {
