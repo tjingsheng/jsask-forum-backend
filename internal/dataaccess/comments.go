@@ -6,7 +6,7 @@ import (
 )
 
 func ListComments(db *database.Database) ([]models.Comment, error) {
-	users := []models.Comment{
+	comments := []models.Comment{
 		{
 			Post: models.Post{
 				Post_ID:       5,
@@ -20,7 +20,7 @@ func ListComments(db *database.Database) ([]models.Comment, error) {
 
 				Username: "Bobby Lee One",
 
-				CommentCount: 23,
+				Comment_Count: 23,
 
 				Likes:               29,
 				Is_Like_Selected:    true,
@@ -40,7 +40,7 @@ func ListComments(db *database.Database) ([]models.Comment, error) {
 
 					Username: "Harry Potter One",
 
-					CommentCount: 5,
+					Comment_Count: 5,
 
 					Likes:               10,
 					Is_Like_Selected:    false,
@@ -58,7 +58,7 @@ func ListComments(db *database.Database) ([]models.Comment, error) {
 
 					Username: "Harry Potter Two",
 
-					CommentCount: 5,
+					Comment_Count: 5,
 
 					Likes:               999,
 					Is_Like_Selected:    true,
@@ -76,7 +76,7 @@ func ListComments(db *database.Database) ([]models.Comment, error) {
 
 					Username: "Harry Potter One",
 
-					CommentCount: 5,
+					Comment_Count: 5,
 
 					Likes:               8,
 					Is_Like_Selected:    true,
@@ -94,7 +94,7 @@ func ListComments(db *database.Database) ([]models.Comment, error) {
 
 					Username: "Harry Potter Two",
 
-					CommentCount: 5,
+					Comment_Count: 5,
 
 					Likes:               6,
 					Is_Like_Selected:    false,
@@ -103,5 +103,5 @@ func ListComments(db *database.Database) ([]models.Comment, error) {
 			},
 		},
 	}
-	return users, nil
+	return comments, nil
 }

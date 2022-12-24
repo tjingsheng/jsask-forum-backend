@@ -19,7 +19,7 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 
 			Username: "Bobby Lee One",
 
-			CommentCount: 23,
+			Comment_Count: 23,
 
 			Likes:               29,
 			Is_Like_Selected:    true,
@@ -37,7 +37,7 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 
 			Username: "Bobby Lee Three",
 
-			CommentCount: 63,
+			Comment_Count: 63,
 
 			Likes:               30,
 			Is_Like_Selected:    false,
@@ -55,7 +55,7 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 
 			Username: "Bobby Lee Two",
 
-			CommentCount: 14,
+			Comment_Count: 14,
 
 			Likes:               15,
 			Is_Like_Selected:    false,
@@ -73,7 +73,7 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 
 			Username: "Bobby Lee One",
 
-			CommentCount: 7,
+			Comment_Count: 7,
 
 			Likes:               44,
 			Is_Like_Selected:    false,
@@ -91,7 +91,7 @@ func ListPosts(db *database.Database) ([]models.Post, error) {
 
 			Username: "Bobby Lee Five",
 
-			CommentCount: 16,
+			Comment_Count: 16,
 
 			Likes:               30,
 			Is_Like_Selected:    false,

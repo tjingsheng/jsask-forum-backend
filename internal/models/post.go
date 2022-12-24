@@ -12,7 +12,7 @@ type Post struct {
 
 	Username string `json:"username"`
 
-	CommentCount int `json:"commentCount"`
+	Comment_Count int `json:"commentCount"`
 
 	Likes               int  `json:"likes"`
 	Is_Like_Selected    bool `json:"isLikeSelected"`
