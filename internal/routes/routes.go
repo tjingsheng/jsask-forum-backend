@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	retriever "github.com/tjingsheng/jsask-forum-backend/internal/handlers/retriever"
+	"github.com/tjingsheng/jsask-forum-backend/internal/handlers/retriever"
 )
 
 func GetRoutes() func(r chi.Router) {
