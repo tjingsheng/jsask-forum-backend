@@ -1,11 +1,11 @@
-package users
+package dataaccess
 
 import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 	"github.com/tjingsheng/jsask-forum-backend/internal/models"
 )
 
-func List(db *database.Database) ([]models.User, error) {
+func ListUsers(db *database.Database) ([]models.User, error) {
 	users := []models.User{
 		{
 			User_ID:       1,
