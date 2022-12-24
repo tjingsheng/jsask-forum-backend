@@ -1,12 +1,13 @@
 package handlers
 
 const (
-	ListUsers = "users.HandleListUsers"
-	ListPosts = "users.HandleListPosts"
-	ListTags  = "users.HandleListTags"
+	HandleList   = "HandleList"
+	ListComments = "Comments.HandleListComments"
+	ListPosts    = "Posts.HandleListPosts"
+	ListTags     = "Tags.HandleListTags"
 
-	SuccessfulListMessage = "successfully listed users"
+	SuccessfulListMessage = "successfully listed data"
 	ErrRetrieveDatabase   = "failed to retrieve database in %s"
-	ErrRetrieveUsers      = "failed to retrieve users in %s"
-	ErrEncodeView         = "failed to retrieve users in %s"
+	ErrRetrieveUsers      = "failed to retrieve data in %s"
+	ErrEncodeView         = "failed to retrieve data in %s"
 )
