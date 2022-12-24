@@ -1,3 +1,28 @@
+# Jing Sheng CVWO Winter Assignment
+
+## Background
+
+Computing for Voluntary Welfare Organisations (CVWO) is an initiative founded by Dr Ben Leong and spearheaded by undergraduates from the National University of Singapore (NUS) School of Computing (SoC). CVWO's mission is to build IT systems that help their partner VWOs serve the community more effectively.
+
+View more at:
+https://www.comp.nus.edu.sg/~vwo/
+
+## Introduction
+
+As part of CVWO's AY2022/23 committee recruitment, freshmen from the NUS SOC are tasked to make a simple web forum.
+
+## Designed and Implemented By
+
+Tan Jing Sheng
+
+A0253492B
+
+First-Year Undergraduate
+
+NUS Computer Science
+
+2022
+
 # CVWO Assignment Sample Golang App
 
 This sample Golang app is provided to help you experiment and practice web development fundamentals.
@@ -13,14 +38,16 @@ and good software development practices.
 Download and install Go by following the instructions [here](https://go.dev/doc/install).
 
 ### Running the app
+
 1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) this repo.
 2. [Clone](https://docs.github.com/en/get-started/quickstart/fork-a-repo#cloning-your-forked-repository) **your** forked repo.
 3. Open your terminal and navigate to the directory containing your cloned project.
 4. Run `go run cmd/server/main.go` and head over to http://localhost:8000/users to view the response.
 
-
 ### Navigating the code
-This is the main file structure. Note that this is simply *one of* various paradigms to organise your code, and is just a bare starting point.
+
+This is the main file structure. Note that this is simply _one of_ various paradigms to organise your code, and is just a bare starting point.
+
 ```
 .
 ├── cmd
@@ -39,16 +66,17 @@ This is the main file structure. Note that this is simply *one of* various parad
 ```
 
 Main directories/files to note:
-* `cmd` contains the main entry point for the application
-* `internal` holds most of the functional code for your project that is specific to the core logic of your application
-* `README.md` is a form of documentation about the project. It is what you are reading right now.
-* `go.mod` contains important metadata, for example, the dependencies in the project. See [here](https://go.dev/ref/mod) for more information
-* `go.sum` See [here](https://go.dev/ref/mod) for more information
+
+- `cmd` contains the main entry point for the application
+- `internal` holds most of the functional code for your project that is specific to the core logic of your application
+- `README.md` is a form of documentation about the project. It is what you are reading right now.
+- `go.mod` contains important metadata, for example, the dependencies in the project. See [here](https://go.dev/ref/mod) for more information
+- `go.sum` See [here](https://go.dev/ref/mod) for more information
 
 Try changing some source code and see how the app changes.
 
 ## Next Steps
 
-* This project uses [go-chi](https://github.com/go-chi/chi) as a web framework. Feel free to explore other web frameworks such as [gin-gonic](https://github.com/gin-gonic/gin). Compare their pros and cons and use whatever that best justifies the trade-offs.
-* Read up more on the [MVC framework](https://developer.mozilla.org/en-US/docs/Glossary/MVC) which this code is designed upon.
-* Sometimes, code formatting can get messy and opiniated. Do see how you can incoporate [linters](https://github.com/golangci/golangci-lint) to format your code.
+- This project uses [go-chi](https://github.com/go-chi/chi) as a web framework. Feel free to explore other web frameworks such as [gin-gonic](https://github.com/gin-gonic/gin). Compare their pros and cons and use whatever that best justifies the trade-offs.
+- Read up more on the [MVC framework](https://developer.mozilla.org/en-US/docs/Glossary/MVC) which this code is designed upon.
+- Sometimes, code formatting can get messy and opiniated. Do see how you can incoporate [linters](https://github.com/golangci/golangci-lint) to format your code.
