@@ -30,5 +30,12 @@ func GetRoutes() func(r chi.Router) {
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(response)
 		})
+
+		r.Get("/users", func(w http.ResponseWriter, req *http.Request) {
+			response, _ := handlers.HandleCurrUser(w, req)
+
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(response)
+		})
 	}
 }
