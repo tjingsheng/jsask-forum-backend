@@ -14,6 +14,7 @@ func GetRoutes() func(r chi.Router) {
 			response, _ := handlers.HandleListComments(w, req)
 
 			w.Header().Set("Content-Type", "application/json")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 			json.NewEncoder(w).Encode(response)
 		})
 
@@ -21,6 +22,7 @@ func GetRoutes() func(r chi.Router) {
 			response, _ := handlers.HandleListPosts(w, req)
 
 			w.Header().Set("Content-Type", "application/json")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 			json.NewEncoder(w).Encode(response)
 		})
 
@@ -28,6 +30,7 @@ func GetRoutes() func(r chi.Router) {
 			response, _ := handlers.HandleListTags(w, req)
 
 			w.Header().Set("Content-Type", "application/json")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 			json.NewEncoder(w).Encode(response)
 		})
 
@@ -35,6 +38,7 @@ func GetRoutes() func(r chi.Router) {
 			response, _ := handlers.HandleCurrUser(w, req)
 
 			w.Header().Set("Content-Type", "application/json")
+			w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 			json.NewEncoder(w).Encode(response)
 		})
 	}
