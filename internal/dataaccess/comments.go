@@ -54,7 +54,7 @@ func ListComments(db *database.Database) (models.Comment, error) {
 				Post_Content:  "2 Comment on this 5 by Two",
 				Parent_Post:   -1,
 
-				Tags: []string{""},
+				Tags: []string{},
 
 				Username: "Harry Potter Two",
 
