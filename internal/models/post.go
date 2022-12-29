@@ -1,20 +1,20 @@
 package models
 
 type Post struct {
-	Post_ID       int    `json:"postID"`
-	User_ID       int    `json:"userID"`
-	Post_Datetime string `json:"postDatetime"`
-	Post_Title    string `json:"postTitle"`
-	Post_Content  string `json:"postContent"`
-	Parent_Post   int    `json:""`
+	ID            int    `json:"id" gorm:"primaryKey"`
+	User_ID       int    `json:"user_id"`
+	Post_Datetime string `json:"post_datetime"`
+	Post_Title    string `json:"post_title"`
+	Post_Content  string `json:"post_content"`
+	Parent_Post   int    `json:"parent_post"`
 
-	Tags []string `json:"tags"`
+	// Tags []string `json:"tags"`
 
-	Username string `json:"username"`
+	// Username string `json:"username"`
 
-	Comment_Count int `json:"commentCount"`
+	// Comment_Count int `json:"commentCount"`
 
-	Likes               int  `json:"likes"`
-	Is_Like_Selected    bool `json:"isLikeSelected"`
-	Is_Dislike_Selected bool `json:"isDislikeSelected"`
+	// Likes               int  `json:"likes"`
+	// Is_Like_Selected    bool `json:"isLikeSelected"`
+	// Is_Dislike_Selected bool `json:"isDislikeSelected"`
 }

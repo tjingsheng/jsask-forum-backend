@@ -10,7 +10,8 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 )
 
-func HandleListTags(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
+func (h handler) HandleListTags(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
+
 	db, err := database.GetDB()
 
 	if err != nil {
