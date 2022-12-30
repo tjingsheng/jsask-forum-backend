@@ -2,11 +2,11 @@ package models
 
 type Post struct {
 	ID            int    `json:"id" gorm:"primaryKey"`
-	User_ID       int    `json:"user_id"`
-	Post_Datetime string `json:"post_datetime"`
-	Post_Title    string `json:"post_title"`
-	Post_Content  string `json:"post_content"`
-	Parent_Post   int    `json:"parent_post"`
+	User_ID       int    `json:"userId"`
+	Post_Datetime string `json:"postDatetime"`
+	Post_Title    string `json:"postTitle"`
+	Post_Content  string `json:"postContent"`
+	Parent_Post   int    `json:"parentPost"`
 
 	// Tags []string `json:"tags"`
 

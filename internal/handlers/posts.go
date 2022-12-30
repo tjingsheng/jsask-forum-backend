@@ -1,37 +1,23 @@
 package handlers
 
-// import (
-// 	"encoding/json"
-// 	"fmt"
-// 	"net/http"
+import (
+	"net/http"
 
-// 	"github.com/tjingsheng/jsask-forum-backend/internal/api"
-// 	"github.com/tjingsheng/jsask-forum-backend/internal/dataaccess"
-// 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
-// )
+	"github.com/tjingsheng/jsask-forum-backend/internal/api"
+	"github.com/tjingsheng/jsask-forum-backend/internal/dataaccess"
+	"github.com/tjingsheng/jsask-forum-backend/internal/database"
+	postview "github.com/tjingsheng/jsask-forum-backend/internal/views/postsview"
+)
 
-// func (h handler) HandleListPosts(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
-// 	db, err := database.GetDB()
+func GetAllPosts(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
 
-// 	if err != nil {
-// 		return nil, fmt.Errorf(ErrRetrieveDatabase, ListPosts)
-// 	}
+	posts, err := dataaccess.ListPosts(database.DB)
 
-// 	users, err := dataaccess.ListPosts(db)
+	allPostsView := make([]postview.ListView, len(posts))
 
-// 	if err != nil {
-// 		return nil, fmt.Errorf(ErrRetrieveUsers, ListPosts)
-// 	}
+	for i := range posts {
+		allPostsView[i] = postview.ListFrom(posts[i])
+	}
 
-// 	data, err := json.Marshal(users)
-// 	if err != nil {
-// 		return nil, fmt.Errorf(ErrEncodeView, ListPosts)
-// 	}
-
-// 	return &api.Response{
-// 		Payload: api.Payload{
-// 			Data: data,
-// 		},
-// 		Messages: []string{SuccessfulListMessage},
-// 	}, nil
-// }
+	return format(err, allPostsView, ListTags)
+}

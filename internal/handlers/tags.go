@@ -1,38 +1,31 @@
 package handlers
 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/tjingsheng/jsask-forum-backend/internal/api"
 	"github.com/tjingsheng/jsask-forum-backend/internal/dataaccess"
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
+	"github.com/tjingsheng/jsask-forum-backend/internal/views/tagsview"
 )
 
-func (h handler) HandleListTags(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
+func GetAllUniqueTags(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
 
-	db, err := database.GetDB()
+	tags, err := dataaccess.ListTags(database.DB)
 
-	if err != nil {
-		return nil, fmt.Errorf(ErrRetrieveDatabase, ListTags)
+	allTagsView := make([]tagsview.ListView, len(tags))
+	for i := range tags {
+		allTagsView[i] = tagsview.ListFrom(tags[i])
 	}
 
-	users, err := dataaccess.ListTags(db)
-
-	if err != nil {
-		return nil, fmt.Errorf(ErrRetrieveUsers, ListTags)
+	keys := make(map[tagsview.ListView]bool)
+	uniqueTags := []tagsview.ListView{}
+	for _, i := range allTagsView {
+		if _, obj := keys[i]; !obj {
+			keys[i] = true
+			uniqueTags = append(uniqueTags, i)
+		}
 	}
 
-	data, err := json.Marshal(users)
-	if err != nil {
-		return nil, fmt.Errorf(ErrEncodeView, ListTags)
-	}
-
-	return &api.Response{
-		Payload: api.Payload{
-			Data: data,
-		},
-		Messages: []string{SuccessfulListMessage},
-	}, nil
+	return format(err, uniqueTags, ListTags)
 }

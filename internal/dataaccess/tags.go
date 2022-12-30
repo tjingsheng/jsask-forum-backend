@@ -1,27 +1,12 @@
 package dataaccess
 
 import (
-	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 	"github.com/tjingsheng/jsask-forum-backend/internal/models"
+	"gorm.io/gorm"
 )
 
-func ListTags(db *database.Database) ([]models.Tag, error) {
-	tags := []models.Tag{
-		{
-			Tag_Name: "tag 1",
-		},
-		{
-			Tag_Name: "tag 2",
-		},
-		{
-			Tag_Name: "tag 3",
-		},
-		{
-			Tag_Name: "tag 4",
-		},
-		{
-			Tag_Name: "tag 5",
-		},
-	}
-	return tags, nil
+func ListTags(db *gorm.DB) ([]models.Tag, error) {
+	var tag []models.Tag
+	result := db.Find(&tag)
+	return tag, result.Error
 }
