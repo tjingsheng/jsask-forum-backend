@@ -9,7 +9,7 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/views/tagsview"
 )
 
-func GetAllUniqueTags(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
+func GetAllTags(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
 
 	tags, err := dataaccess.ListTags(database.DB)
 
@@ -18,14 +18,14 @@ func GetAllUniqueTags(w http.ResponseWriter, r *http.Request) (*api.Response, er
 		allTagsView[i] = tagsview.ListFrom(tags[i])
 	}
 
-	keys := make(map[tagsview.ListView]bool)
-	uniqueTags := []tagsview.ListView{}
-	for _, i := range allTagsView {
-		if _, obj := keys[i]; !obj {
-			keys[i] = true
-			uniqueTags = append(uniqueTags, i)
-		}
-	}
+	// keys := make(map[tagsview.ListView]bool)
+	// uniqueTags := []tagsview.ListView{}
+	// for _, i := range allTagsView {
+	// 	if _, obj := keys[i]; !obj {
+	// 		keys[i] = true
+	// 		uniqueTags = append(uniqueTags, i)
+	// 	}
+	// }
 
-	return format(err, uniqueTags, ListTags)
+	return format(err, allTagsView, ListTags)
 }

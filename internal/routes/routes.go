@@ -10,8 +10,8 @@ import (
 
 func GetRoutes() func(r chi.Router) {
 	return func(r chi.Router) {
-		r.Get("/uniquetags", func(w http.ResponseWriter, req *http.Request) {
-			response, _ := handlers.GetAllUniqueTags(w, req)
+		r.Get("/tags", func(w http.ResponseWriter, req *http.Request) {
+			response, _ := handlers.GetAllTags(w, req)
 			json.NewEncoder(w).Encode(response)
 		})
 

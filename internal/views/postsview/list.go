@@ -1,4 +1,4 @@
-package postview
+package postsview
 
 import "github.com/tjingsheng/jsask-forum-backend/internal/models"
 
