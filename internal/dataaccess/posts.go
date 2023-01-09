@@ -7,9 +7,7 @@ import (
 
 func ListPosts(db *gorm.DB) ([]models.PostZ, error) {
 	var post []models.PostZ
-	// var tags models.Tag
 	result := db.Model(&post).Preload("tags").Find(&post, "parent_post = ?", 0)
-
 	return post, result.Error
 }
 
