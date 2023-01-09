@@ -1,43 +1,45 @@
 package postsview
 
-import "github.com/tjingsheng/jsask-forum-backend/internal/models"
+import (
+	"github.com/tjingsheng/jsask-forum-backend/internal/models"
+)
 
 type ListView struct {
-	ID            int    `json:"postID"`
-	User_ID       int    `json:"userID"`
-	Post_Datetime string `json:"postDatetime"`
-	Post_Title    string `json:"postTitle"`
-	Post_Content  string `json:"postContent"`
-	Parent_Post   int    `json:"parentPost"`
+	ID           int    `json:"postID"`
+	UserID       int    `json:"userID"`
+	PostDatetime string `json:"postDatetime"`
+	PostTitle    string `json:"postTitle"`
+	PostContent  string `json:"postContent"`
+	ParentPost   int    `json:"parentPost"`
 
-	Tags []models.Tag `json:"tags"`
+	Tags []models.PostsTag `json:"tags" gorm:"foreignKey:PostID"`
 
-	Username string `json:"username"`
+	// Username string `json:"username"`
 
-	Comment_Count int `json:"commentCount"`
+	// CommentCount int `json:"commentCount"`
 
-	Likes               int  `json:"likes"`
-	Is_Like_Selected    bool `json:"isLikeSelected"`
-	Is_Dislike_Selected bool `json:"isDislikeSelected"`
+	// Likes             int  `json:"likes"`
+	// IsLikeSelected    bool `json:"isLikeSelected"`
+	// IsDislikeSelected bool `json:"isDislikeSelected"`
 }
 
-func ListFrom(post models.PostZ) ListView {
+func ListFrom(post ListView) ListView {
 	return ListView{
-		ID:            post.ID,
-		User_ID:       post.User_ID,
-		Post_Datetime: post.Post_Datetime,
-		Post_Title:    post.Post_Title,
-		Post_Content:  post.Post_Content,
-		Parent_Post:   post.Parent_Post,
+		ID:           post.ID,
+		UserID:       post.UserID,
+		PostDatetime: post.PostDatetime,
+		PostTitle:    post.PostTitle,
+		PostContent:  post.PostContent,
+		ParentPost:   post.ParentPost,
 
-		Tags: post.Tags,
+		// Tags: post.Tags,
 
-		Username: post.Username,
+		// Username: post.Username,
 
-		Comment_Count: post.Comment_Count,
+		// Comment_Count: post.Comment_Count,
 
-		Likes:               post.Likes,
-		Is_Like_Selected:    post.Is_Like_Selected,
-		Is_Dislike_Selected: post.Is_Dislike_Selected,
+		// Likes:               post.Likes,
+		// Is_Like_Selected:    post.Is_Like_Selected,
+		// Is_Dislike_Selected: post.Is_Dislike_Selected,
 	}
 }
