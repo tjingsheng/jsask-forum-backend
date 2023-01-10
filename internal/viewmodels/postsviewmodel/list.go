@@ -12,7 +12,7 @@ type ListView struct {
 	PostContent  string `json:"postContent"`
 	ParentPost   int    `json:"parentPost"`
 
-	Tags []models.Tag `json:"tags" gorm:"many2many:posts_tags;joinForeignKey:id;"`
+	Tags []models.Tag `json:"tags" gorm:"many2many:posts_tags;joinForeignKey:post_id;"`
 
 	User models.User `json:"user" gorm:"foreignKey:id"`
 

@@ -11,13 +11,13 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/views/postsview"
 )
 
-func GetAllPosts(w http.ResponseWriter, r *http.Request) (*api.Response, error) {
+func GetAllPosts(w http.ResponseWriter, r *http.Request, userId string) (*api.Response, error) {
 	posts, err := dataaccess.ListPosts(database.DB)
 	allPostsViewModel := make([]postsviewmodel.ListView, len(posts))
 	allPostsView := make([]postsview.ListView, len(posts))
 	for i := range posts {
 		allPostsViewModel[i] = postsviewmodel.ListFrom(posts[i])
-		allPostsView[i] = postsview.ListFrom(allPostsViewModel[i])
+		allPostsView[i] = postsview.ListFrom(allPostsViewModel[i], userId)
 	}
 	return utils.HandlerFormat(err, allPostsView, "GetAllPosts")
 }

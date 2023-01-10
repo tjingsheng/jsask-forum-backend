@@ -21,8 +21,9 @@ func GetRoutes() func(r chi.Router) {
 			json.NewEncoder(w).Encode(response)
 		})
 
-		r.Get("/posts", func(w http.ResponseWriter, req *http.Request) {
-			response, _ := handlers.GetAllPosts(w, req)
+		r.Get("/posts/{userId}", func(w http.ResponseWriter, req *http.Request) {
+			userId := chi.URLParam(req, "userId")
+			response, _ := handlers.GetAllPosts(w, req, userId)
 			json.NewEncoder(w).Encode(response)
 		})
 
