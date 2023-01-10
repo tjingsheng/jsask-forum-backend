@@ -1,6 +1,8 @@
-package userview
+package curruserview
 
-import "github.com/tjingsheng/jsask-forum-backend/internal/models"
+import (
+	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/curruserviewmodel"
+)
 
 type ListView struct {
 	ID           int    `json:"id" gorm:"primaryKey"`
@@ -8,7 +10,7 @@ type ListView struct {
 	UserDatetime string `json:"userDatetime"`
 }
 
-func ListFrom(user models.User) ListView {
+func ListFrom(user curruserviewmodel.ListView) ListView {
 	return ListView{
 		ID:           user.ID,
 		Username:     user.Username,

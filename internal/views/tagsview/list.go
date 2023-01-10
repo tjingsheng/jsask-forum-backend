@@ -1,13 +1,17 @@
 package tagsview
 
-import "github.com/tjingsheng/jsask-forum-backend/internal/models"
+import (
+	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/tagsviewmodel"
+)
 
 type ListView struct {
-	TagName string `json:"tagName"`
+	Value string `json:"value"`
+	Label string `json:"name"`
 }
 
-func ListFrom(tag models.Tag) ListView {
+func ListFrom(tag tagsviewmodel.ListView) ListView {
 	return ListView{
-		TagName: tag.TagName,
+		Value: tag.TagName,
+		Label: tag.TagName,
 	}
 }

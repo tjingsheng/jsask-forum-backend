@@ -1,7 +1,7 @@
 package postsview
 
 import (
-	"github.com/tjingsheng/jsask-forum-backend/internal/models"
+	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/postsviewmodel"
 )
 
 type ListView struct {
@@ -12,18 +12,28 @@ type ListView struct {
 	PostContent  string `json:"postContent"`
 	ParentPost   int    `json:"parentPost"`
 
-	Tags []models.PostsTag `json:"tags" gorm:"foreignKey:PostID"`
+	Tags []string `json:"tags"`
 
-	// Username string `json:"username"`
+	Username string `json:"username"`
 
-	// CommentCount int `json:"commentCount"`
+	CommentCount int `json:"commentcount"`
 
-	// Likes             int  `json:"likes"`
-	// IsLikeSelected    bool `json:"isLikeSelected"`
-	// IsDislikeSelected bool `json:"isDislikeSelected"`
+	Likes             int  `json:"likes"`
+	IsLikeSelected    bool `json:"isLikeSelected"`
+	IsDislikeSelected bool `json:"isDislikeSelected"`
 }
 
-func ListFrom(post ListView) ListView {
+func ListFrom(post postsviewmodel.ListView) ListView {
+	postTags := make([]string, len(post.Tags))
+	for i := range post.Tags {
+		postTags[i] = post.Tags[i].TagName
+	}
+	postUsername := post.User.Username
+	postCommentCount := len(post.Comments)
+	postLikes := 20
+	postIsLikeSelected := true
+	postIsDislikeSelected := true
+
 	return ListView{
 		ID:           post.ID,
 		UserID:       post.UserID,
@@ -32,14 +42,14 @@ func ListFrom(post ListView) ListView {
 		PostContent:  post.PostContent,
 		ParentPost:   post.ParentPost,
 
-		// Tags: post.Tags,
+		Tags: postTags,
 
-		// Username: post.Username,
+		Username: postUsername,
 
-		// Comment_Count: post.Comment_Count,
+		CommentCount: postCommentCount,
 
-		// Likes:               post.Likes,
-		// Is_Like_Selected:    post.Is_Like_Selected,
-		// Is_Dislike_Selected: post.Is_Dislike_Selected,
+		Likes:             postLikes,
+		IsLikeSelected:    postIsLikeSelected,
+		IsDislikeSelected: postIsDislikeSelected,
 	}
 }

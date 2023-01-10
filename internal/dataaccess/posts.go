@@ -2,16 +2,14 @@ package dataaccess
 
 import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/models"
-	"github.com/tjingsheng/jsask-forum-backend/internal/views/postsview"
+	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/postsviewmodel"
 	"gorm.io/gorm"
 )
 
-func ListPosts(db *gorm.DB) ([]postsview.ListView, error) {
-
-	var posts []postsview.ListView
-	result := db.Model(&models.Post{}).Preload("Tags").Find(&posts, "parent_post = ?", 0)
+func ListPosts(db *gorm.DB) ([]postsviewmodel.ListView, error) {
+	var posts []postsviewmodel.ListView
+	result := db.Model(&models.Post{}).Preload("Tags").Preload("User").Preload("Comments").Preload("PostPreferences").Find(&posts, "parent_post = ?", 0)
 	return posts, result.Error
-
 }
 
 // import (

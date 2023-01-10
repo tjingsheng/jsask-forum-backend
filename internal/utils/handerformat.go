@@ -1,4 +1,4 @@
-package handlers
+package utils
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/api"
 )
 
-func format(err error, x interface{}, handlerName string) (*api.Response, error) {
+func HandlerFormat(err error, x interface{}, handlerName string) (*api.Response, error) {
 	if err != nil {
 		return nil, fmt.Errorf(ErrRetrieveData, handlerName)
 	}
