@@ -19,7 +19,6 @@ func GetAllTags(w http.ResponseWriter, req *http.Request) {
 		allTagsViewModel[i] = tagsviewmodel.ListFrom(tags[i])
 		allTagsView[i] = tagsview.ListFrom(allTagsViewModel[i])
 	}
-
 	response, _ := utils.HandlerFormatGet(err, allTagsView, "GetAllTags")
 	json.NewEncoder(w).Encode(response)
 }

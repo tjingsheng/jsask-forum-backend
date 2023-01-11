@@ -20,3 +20,12 @@ func GetCurrUser(w http.ResponseWriter, req *http.Request) {
 	response, _ := utils.HandlerFormatGet(err, currUserView, "GetCurrUser")
 	json.NewEncoder(w).Encode(response)
 }
+
+func PostNewUser(w http.ResponseWriter, req *http.Request) {
+	username := chi.URLParam(req, "username")
+	currUser, err := dataaccess.ListCurrUser(database.DB, username)
+	currUserViewModel := curruserviewmodel.ListFrom(currUser)
+	currUserView := curruserview.ListFrom(currUserViewModel)
+	response, _ := utils.HandlerFormatGet(err, currUserView, "GetCurrUser")
+	json.NewEncoder(w).Encode(response)
+}
