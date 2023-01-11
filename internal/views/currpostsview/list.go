@@ -6,7 +6,7 @@ import (
 )
 
 type ListView struct {
-	Posts    postsview.ListView   `json:"posts"`
+	Posts    postsview.ListView   `json:"post"`
 	Comments []postsview.ListView `json:"comments"`
 }
 

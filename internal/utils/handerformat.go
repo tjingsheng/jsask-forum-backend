@@ -8,7 +8,7 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/constants"
 )
 
-func HandlerFormat(err error, x interface{}, handlerName string) (*api.Response, error) {
+func HandlerFormatGet(err error, x interface{}, handlerName string) (*api.Response, error) {
 	if err != nil {
 		return nil, fmt.Errorf(constants.ErrRetrieveData, handlerName)
 	}
