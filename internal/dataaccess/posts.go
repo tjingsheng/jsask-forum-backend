@@ -18,8 +18,7 @@ func ListCurrPost(db *gorm.DB, postId string) ([]postsviewmodel.ListView, error)
 	return posts, result.Error
 }
 
-func CreateUser(db *gorm.DB) ([]postsviewmodel.ListView, error) {
-	var posts []postsviewmodel.ListView
-	result := db.Model(&models.Post{}).Preload("Tags").Preload("User").Preload("Comments").Preload("PostPreferences").Find(&posts, "parent_post = ?", 0)
-	return posts, result.Error
+func CreateUser(db *gorm.DB, user models.User) error {
+	result := db.Create(&user)
+	return result.Error
 }
