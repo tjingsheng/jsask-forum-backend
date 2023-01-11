@@ -1,8 +1,7 @@
 package constants
 
 const (
-
-	//handler constants
+	//Handler constants
 	SuccessfulListMessage = "successfully listed data with %s"
 	ErrRetrieveDatabase   = "failed to retrieve database in %s"
 	ErrRetrieveData       = "failed to retrieve data in %s"
