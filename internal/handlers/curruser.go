@@ -12,7 +12,7 @@ import (
 )
 
 func GetCurrentUser(w http.ResponseWriter, r *http.Request, username string) (*api.Response, error) {
-	currUser, err := dataaccess.ListCurentUser(database.DB, username)
+	currUser, err := dataaccess.ListCurrUser(database.DB, username)
 	currUserViewModel := curruserviewmodel.ListFrom(currUser)
 	currUserView := curruserview.ListFrom(currUserViewModel)
 	return utils.HandlerFormat(err, currUserView, "GetCurrentUser")

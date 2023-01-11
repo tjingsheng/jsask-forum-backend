@@ -1,8 +1,6 @@
-package postsviewmodel
+package currpostviewmodel
 
-import (
-	"github.com/tjingsheng/jsask-forum-backend/internal/models"
-)
+import "github.com/tjingsheng/jsask-forum-backend/internal/models"
 
 type ListView struct {
 	ID           int    `json:"postID"`

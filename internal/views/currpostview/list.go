@@ -1,4 +1,4 @@
-package postsview
+package currpostview
 
 import (
 	"strconv"
@@ -6,26 +6,13 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/constants"
 	"github.com/tjingsheng/jsask-forum-backend/internal/models"
 	"github.com/tjingsheng/jsask-forum-backend/internal/utils"
-	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/postsviewmodel"
+	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/currpostviewmodel"
+	"github.com/tjingsheng/jsask-forum-backend/internal/views/postsview"
 )
 
 type ListView struct {
-	ID           int    `json:"postId"`
-	UserID       int    `json:"userId"`
-	PostDatetime string `json:"postDatetime"`
-	PostTitle    string `json:"postTitle"`
-	PostContent  string `json:"postContent"`
-	ParentPost   int    `json:"parentPost"`
-
-	Tags []string `json:"tags"`
-
-	Username string `json:"username"`
-
-	CommentCount int `json:"commentCount"`
-
-	Likes             int  `json:"likes"`
-	IsLikeSelected    bool `json:"isLikeSelected"`
-	IsDislikeSelected bool `json:"isDislikeSelected"`
+	Post     postsview.ListView `json:"post"`
+	Comments []models.Post      `json:"comments"`
 }
 
 func isLiked(postPreference models.PostPreference) bool {
@@ -56,7 +43,7 @@ func isNotCurrUser(userId string) func(models.PostPreference) bool {
 	}
 }
 
-func ListFrom(post postsviewmodel.ListView, userId string) ListView {
+func ListFrom(post currpostviewmodel.ListView, userId string) ListView {
 	postPreferencesCurrUser := utils.FilterStruct(post.PostPreferences, isCurrUser(userId))
 	postPreferencesNoCurrUser := utils.FilterStruct(post.PostPreferences, isNotCurrUser(userId))
 	postTags := make([]string, len(post.Tags))
@@ -69,7 +56,7 @@ func ListFrom(post postsviewmodel.ListView, userId string) ListView {
 	postIsLikeSelected := len(utils.FilterStruct(postPreferencesCurrUser, isLiked)) != 0
 	postIsDislikeSelected := len(utils.FilterStruct(postPreferencesCurrUser, isDisliked)) != 0
 
-	return ListView{
+	currPost := postsview.ListView{
 		ID:           post.ID,
 		UserID:       post.UserID,
 		PostDatetime: post.PostDatetime,
@@ -86,5 +73,10 @@ func ListFrom(post postsviewmodel.ListView, userId string) ListView {
 		Likes:             postLikes,
 		IsLikeSelected:    postIsLikeSelected,
 		IsDislikeSelected: postIsDislikeSelected,
+	}
+
+	return ListView{
+		Post:     currPost,
+		Comments: post.Comments,
 	}
 }
