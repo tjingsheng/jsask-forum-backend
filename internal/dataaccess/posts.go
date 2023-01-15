@@ -28,3 +28,8 @@ func ListCurrPost(db *gorm.DB, postId string) ([]postsviewmodel.ListView, error)
 		Or("id = ?", postId).Find(&posts)
 	return posts, result.Error
 }
+
+func CreatePost(db *gorm.DB, newPost models.Post) error {
+	result := db.Create(&newPost)
+	return result.Error
+}

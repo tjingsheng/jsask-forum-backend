@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -23,7 +22,6 @@ func PutPostPreference(w http.ResponseWriter, req *http.Request) {
 
 	var request PostPreferenceRequest
 	json.NewDecoder(req.Body).Decode(&request)
-	fmt.Println(request)
 
 	newPostPreference := models.PostPreference{
 		UserID:             request.UserID,
