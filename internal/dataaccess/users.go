@@ -10,6 +10,8 @@ import (
 
 func ListCurrUser(db *gorm.DB, username string) (models.User, error) {
 	var user models.User
-	result := db.Where(models.User{Username: username}).Attrs(models.User{UserDatetime: time.Now().Format(constants.Go2PostgresqlDatetime)}).FirstOrCreate(&user)
+	result := db.Where(models.User{Username: username}).
+		Attrs(models.User{UserDatetime: time.Now().Format(constants.Go2PostgresqlDatetime)}).
+		FirstOrCreate(&user)
 	return user, result.Error
 }
