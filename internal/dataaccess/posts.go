@@ -13,6 +13,7 @@ func ListPosts(db *gorm.DB) ([]postsviewmodel.ListView, error) {
 		Preload("User").
 		Preload("Comments").
 		Preload("PostPreferences").
+		Order("post_datetime DESC").
 		Find(&posts, "parent_post = ?", 0)
 	return posts, result.Error
 }
