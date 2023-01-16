@@ -35,6 +35,15 @@ func CreatePost(db *gorm.DB, newPost models.Post) error {
 	return result.Error
 }
 
+func UpdatePost(db *gorm.DB, updatedPost models.Post, postId int) error {
+	var post models.Post
+	db.First(&post, postId)
+	post.PostTitle = updatedPost.PostTitle
+	post.PostContent = updatedPost.PostContent
+	result := db.Updates(&post)
+	return result.Error
+}
+
 func DeletePost(db *gorm.DB, postId string) error {
 	var post models.Post
 	result := db.Delete(&post, postId)

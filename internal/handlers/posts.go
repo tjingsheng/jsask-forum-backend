@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -45,8 +44,27 @@ func GetCurrPost(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func PostNewPost(w http.ResponseWriter, req *http.Request) {
+func PutPost(w http.ResponseWriter, req *http.Request) {
+	type PutPostRequest struct {
+		PostID      int    `json:"postId"`
+		PostTitle   string `json:"postTitle"`
+		PostContent string `json:"postContent"`
 
+		Tags []string `json:"tags"`
+	}
+
+	var request PutPostRequest
+	json.NewDecoder(req.Body).Decode(&request)
+	updatedPost := models.Post{
+		PostTitle:   request.PostTitle,
+		PostContent: request.PostContent,
+	}
+	err := dataaccess.UpdatePost(database.DB, updatedPost, request.PostID)
+	response, _ := utils.HandlerFormatter(err, updatedPost, "PutPost", constants.SuccessfulPostMessage)
+	json.NewEncoder(w).Encode(response)
+}
+
+func PostPost(w http.ResponseWriter, req *http.Request) {
 	type PostNewPostRequest struct {
 		UserID      int    `json:"userId"`
 		PostTitle   string `json:"postTitle"`
@@ -58,8 +76,6 @@ func PostNewPost(w http.ResponseWriter, req *http.Request) {
 
 	var request PostNewPostRequest
 	json.NewDecoder(req.Body).Decode(&request)
-	fmt.Println(request)
-
 	newPost := models.Post{
 		UserID:       request.UserID,
 		PostDatetime: time.Now().Format(constants.Go2PostgresqlDatetime),
@@ -69,7 +85,7 @@ func PostNewPost(w http.ResponseWriter, req *http.Request) {
 	}
 
 	err := dataaccess.CreatePost(database.DB, newPost)
-	response, _ := utils.HandlerFormatter(err, newPost, "PostNewPost", constants.SuccessfulPostMessage)
+	response, _ := utils.HandlerFormatter(err, newPost, "PostPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
 

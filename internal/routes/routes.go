@@ -13,9 +13,11 @@ func GetRoutes() func(r chi.Router) {
 		r.Get("/currpost/{userId}/{postId}", handlers.GetCurrPost)
 
 		r.Put("/postpreference", handlers.PutPostPreference)
+		r.Put("/post", handlers.PutPost)
 
-		r.Post("/post", handlers.PostNewPost)
+		r.Post("/post", handlers.PostPost)
 
 		r.Delete("/post/{postId}", handlers.DeletePost)
+
 	}
 }
