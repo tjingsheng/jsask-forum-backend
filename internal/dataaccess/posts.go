@@ -25,6 +25,7 @@ func ListCurrPost(db *gorm.DB, postId string) ([]postsviewmodel.ListView, error)
 		Preload("User").
 		Preload("Comments").
 		Preload("PostPreferences").
+		Order("post_datetime DESC").
 		Where("parent_post = ?", postId).
 		Or("id = ?", postId).Find(&posts)
 	return posts, result.Error
