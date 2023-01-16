@@ -2,8 +2,10 @@ package constants
 
 const (
 	//Handler constants
-	SuccessfulListMessage   = "successfully listed data with %s"
-	SuccessfulPostedMessage = "successfully posted data with %s"
+	SuccessfulGetMessage    = "successfully GET data with %s"
+	SuccessfulPutMessage    = "successfully PUT data with %s"
+	SuccessfulPostMessage   = "successfully POST data with %s"
+	SuccessfulDeleteMessage = "successfully DELETE data with %s"
 	ErrRetrieveDatabase     = "failed to retrieve database in %s"
 	ErrRetrieveData         = "failed to retrieve data in %s"
 	ErrEncodeView           = "failed to retrieve data in %s"

@@ -16,5 +16,6 @@ func GetRoutes() func(r chi.Router) {
 
 		r.Post("/post", handlers.PostNewPost)
 
+		r.Delete("/post/{postId}", handlers.DeletePost)
 	}
 }

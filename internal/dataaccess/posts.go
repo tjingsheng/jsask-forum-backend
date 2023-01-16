@@ -34,3 +34,9 @@ func CreatePost(db *gorm.DB, newPost models.Post) error {
 	result := db.Create(&newPost)
 	return result.Error
 }
+
+func DeletePost(db *gorm.DB, postId string) error {
+	var post models.Post
+	result := db.Delete(&post, postId)
+	return result.Error
+}

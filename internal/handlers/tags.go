@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/tjingsheng/jsask-forum-backend/internal/constants"
 	"github.com/tjingsheng/jsask-forum-backend/internal/dataaccess"
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 	"github.com/tjingsheng/jsask-forum-backend/internal/utils"
@@ -19,6 +20,6 @@ func GetAllTags(w http.ResponseWriter, req *http.Request) {
 		allTagsViewModel[i] = tagsviewmodel.ListFrom(tags[i])
 		allTagsView[i] = tagsview.ListFrom(allTagsViewModel[i])
 	}
-	response, _ := utils.HandlerFormatGet(err, allTagsView, "GetAllTags")
+	response, _ := utils.HandlerFormatter(err, allTagsView, "GetAllTags", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }

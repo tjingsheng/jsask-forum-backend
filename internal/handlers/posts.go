@@ -26,7 +26,7 @@ func GetAllPosts(w http.ResponseWriter, req *http.Request) {
 		allPostsViewModel[i] = postsviewmodel.ListFrom(posts[i])
 		allPostsView[i] = postsview.ListFrom(allPostsViewModel[i], userId)
 	}
-	response, _ := utils.HandlerFormatGet(err, allPostsView, "GetAllPosts")
+	response, _ := utils.HandlerFormatter(err, allPostsView, "GetAllPosts", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -41,7 +41,7 @@ func GetCurrPost(w http.ResponseWriter, req *http.Request) {
 		allCurrPostsView[i] = postsview.ListFrom(allCurrPostsViewModel[i], userId)
 	}
 	currPostView := currpostsview.ListFrom(allCurrPostsView)
-	response, _ := utils.HandlerFormatGet(err, currPostView, "GetAllPosts")
+	response, _ := utils.HandlerFormatter(err, currPostView, "GetAllPosts", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -69,6 +69,13 @@ func PostNewPost(w http.ResponseWriter, req *http.Request) {
 	}
 
 	err := dataaccess.CreatePost(database.DB, newPost)
-	response, _ := utils.HandlerFormatPost(err, newPost, "PostNewPost")
+	response, _ := utils.HandlerFormatter(err, newPost, "PostNewPost", constants.SuccessfulPostMessage)
+	json.NewEncoder(w).Encode(response)
+}
+
+func DeletePost(w http.ResponseWriter, req *http.Request) {
+	postId := chi.URLParam(req, "postId")
+	err := dataaccess.DeletePost(database.DB, postId)
+	response, _ := utils.HandlerFormatter(err, postId, "DeletePost", constants.SuccessfulDeleteMessage)
 	json.NewEncoder(w).Encode(response)
 }

@@ -31,6 +31,6 @@ func PutPostPreference(w http.ResponseWriter, req *http.Request) {
 	}
 
 	err := dataaccess.UpdatePostPreference(database.DB, newPostPreference)
-	response, _ := utils.HandlerFormatPost(err, newPostPreference, "PutPostPreference")
+	response, _ := utils.HandlerFormatter(err, newPostPreference, "PutPostPreference", constants.SuccessfulPutMessage)
 	json.NewEncoder(w).Encode(response)
 }

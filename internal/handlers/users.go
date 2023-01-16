@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"github.com/tjingsheng/jsask-forum-backend/internal/constants"
 	"github.com/tjingsheng/jsask-forum-backend/internal/dataaccess"
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 	"github.com/tjingsheng/jsask-forum-backend/internal/utils"
@@ -17,6 +18,6 @@ func GetCurrUser(w http.ResponseWriter, req *http.Request) {
 	currUser, err := dataaccess.ListCurrUser(database.DB, username)
 	currUserViewModel := curruserviewmodel.ListFrom(currUser)
 	currUserView := curruserview.ListFrom(currUserViewModel)
-	response, _ := utils.HandlerFormatGet(err, currUserView, "GetCurrUser")
+	response, _ := utils.HandlerFormatter(err, currUserView, "GetCurrUser", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }
