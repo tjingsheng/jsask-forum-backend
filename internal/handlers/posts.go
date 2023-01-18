@@ -63,7 +63,7 @@ func PutPost(w http.ResponseWriter, req *http.Request) {
 	}
 
 	err := dataaccess.UpdatePost(database.DB, updatedPost, request.PostID)
-	dataaccess.CreateTags(database.DB, request.Tags, request.PostID)
+	dataaccess.CreateTags(database.DB, utils.CapitaliseAndRemoveDuplicates(request.Tags), request.PostID)
 	response, _ := utils.HandlerFormatter(err, updatedPost, "PutPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
@@ -89,7 +89,7 @@ func PostPost(w http.ResponseWriter, req *http.Request) {
 	}
 
 	postId, err := dataaccess.CreatePost(database.DB, newPost)
-	dataaccess.CreateTags(database.DB, utils.removeDuplicateStr(request.Tags), postId)
+	dataaccess.CreateTags(database.DB, utils.CapitaliseAndRemoveDuplicates(request.Tags), postId)
 	response, _ := utils.HandlerFormatter(err, newPost, "PostPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }

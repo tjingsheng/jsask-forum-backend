@@ -1,6 +1,6 @@
 package utils
 
-func removeDuplicateStr(strSlice []string) []string {
+func RemoveDuplicateStr(strSlice []string) []string {
 	allKeys := make(map[string]bool)
 	result := []string{}
 	for _, item := range strSlice {

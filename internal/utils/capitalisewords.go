@@ -7,6 +7,6 @@ import (
 	"strings"
 )
 
-func CapitalizeWords(str string) string {
+func CapitaliseWords(str string) string {
 	return strings.TrimSpace(cases.Title(language.Und).String(str))
 }
