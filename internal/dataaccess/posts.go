@@ -31,9 +31,9 @@ func ListCurrPost(db *gorm.DB, postId string) ([]postsviewmodel.ListView, error)
 	return posts, result.Error
 }
 
-func CreatePost(db *gorm.DB, newPost models.Post) error {
+func CreatePost(db *gorm.DB, newPost models.Post) (int, error) {
 	result := db.Create(&newPost)
-	return result.Error
+	return newPost.ID, result.Error
 }
 
 func UpdatePost(db *gorm.DB, updatedPost models.Post, postId int) error {

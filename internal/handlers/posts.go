@@ -84,7 +84,8 @@ func PostPost(w http.ResponseWriter, req *http.Request) {
 		ParentPost:   request.ParentPost,
 	}
 
-	err := dataaccess.CreatePost(database.DB, newPost)
+	postId, err := dataaccess.CreatePost(database.DB, newPost)
+	dataaccess.CreateTags(database.DB, request.Tags, postId)
 	response, _ := utils.HandlerFormatter(err, newPost, "PostPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
