@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -55,11 +56,14 @@ func PutPost(w http.ResponseWriter, req *http.Request) {
 
 	var request PutPostRequest
 	json.NewDecoder(req.Body).Decode(&request)
+	fmt.Print(request.Tags)
 	updatedPost := models.Post{
 		PostTitle:   request.PostTitle,
 		PostContent: request.PostContent,
 	}
+
 	err := dataaccess.UpdatePost(database.DB, updatedPost, request.PostID)
+	dataaccess.CreateTags(database.DB, request.Tags, request.PostID)
 	response, _ := utils.HandlerFormatter(err, updatedPost, "PutPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
