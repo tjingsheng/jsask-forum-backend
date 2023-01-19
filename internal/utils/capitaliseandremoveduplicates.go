@@ -5,6 +5,6 @@ func CapitaliseAndRemoveDuplicates(str []string) []string {
 	for _, item := range str {
 		result = append(result, CapitaliseWords(item))
 	}
-	result = RemoveDuplicateStr(result)
+	result = RemoveDuplicates(result)
 	return result
 }

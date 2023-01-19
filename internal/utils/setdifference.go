@@ -1,17 +1,14 @@
 package utils
 
-func SetDifference(setA, setB []string) []string {
-	setA = RemoveDuplicateStr(setA)
-	setB = RemoveDuplicateStr(setB)
+func SetDifference[T string | int](setA, setB []T) []T {
+	m := make(map[T]bool)
+	var diff []T
 
-	m := make(map[string]bool)
-	var diff []string
-
-	for _, item := range setA {
+	for _, item := range setB {
 		m[item] = true
 	}
 
-	for _, item := range setB {
+	for _, item := range setA {
 		if _, in := m[item]; !in {
 			diff = append(diff, item)
 		}

@@ -9,12 +9,16 @@ import (
 )
 
 func ListTags(db *gorm.DB) ([]models.Tag, error) {
+	CleanPostTags(db)
+	CleanTags(db)
 	var tag []models.Tag
 	result := db.Find(&tag)
 	return tag, result.Error
 }
 
 func CreateTags(db *gorm.DB, rawTags []string, postId int) {
+	CleanPostTags(db)
+	CleanTags(db)
 	db.Where("post_id = ?", postId).Delete(&models.PostsTags{})
 	for _, rawTag := range rawTags {
 		var tag = models.Tag{}
@@ -22,12 +26,37 @@ func CreateTags(db *gorm.DB, rawTags []string, postId int) {
 		var postTag = models.PostsTags{PostID: postId, TagID: tag.ID}
 		db.Create(&postTag)
 	}
+}
 
-	var tagIds []string
-	var pTagIds []string
-	db.Model(&models.PostsTags{}).Pluck("tag_id", &pTagIds)
+func CleanTags(db *gorm.DB) {
+	var tagIds []int
+	var jTagIds []int
 	db.Model(&models.Tag{}).Pluck("id", &tagIds)
-	fmt.Println(tagIds)
-	fmt.Println(pTagIds)
-	fmt.Println(utils.SetDifference(tagIds, pTagIds))
+	db.Model(&models.PostsTags{}).Pluck("tag_id", &jTagIds)
+	tagIdDiff := utils.SetDifference(tagIds, jTagIds)
+	if len(tagIdDiff) > 0 {
+		db.Where("id IN (?)", tagIdDiff).Delete(&models.Tag{})
+	}
+}
+
+func CleanPostTags(db *gorm.DB) {
+	var postIds []int
+	var jPostIds []int
+	db.Model(&models.Post{}).Pluck("id", &postIds)
+	db.Model(&models.PostsTags{}).Pluck("post_id", &jPostIds)
+	postIdDiff := utils.SetDifference(jPostIds, postIds)
+	if len(postIdDiff) > 0 {
+		fmt.Println("hi")
+		db.Where("post_id IN (?)", postIdDiff).Delete(&models.PostsTags{})
+		fmt.Println(db.Where("post_id IN (?)", postIdDiff).Delete(&models.PostsTags{}))
+	}
+
+	var tagIds []int
+	var jTagIds []int
+	db.Model(&models.Tag{}).Pluck("id", &tagIds)
+	db.Model(&models.PostsTags{}).Pluck("tag_id", &jTagIds)
+	tagIdDiff := utils.SetDifference(jTagIds, tagIds)
+	if len(tagIdDiff) > 0 {
+		db.Where("tag_id IN ?", tagIdDiff).Delete(&models.PostsTags{})
+	}
 }
