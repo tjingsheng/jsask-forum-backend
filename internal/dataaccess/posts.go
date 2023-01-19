@@ -42,11 +42,13 @@ func UpdatePost(db *gorm.DB, updatedPost models.Post, postId int) error {
 	post.PostTitle = updatedPost.PostTitle
 	post.PostContent = updatedPost.PostContent
 	result := db.Updates(&post)
+	UpdateTables(db)
 	return result.Error
 }
 
 func DeletePost(db *gorm.DB, postId string) error {
 	var post models.Post
 	result := db.Delete(&post, postId)
+	UpdateTables(db)
 	return result.Error
 }
