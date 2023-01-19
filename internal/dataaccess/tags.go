@@ -1,8 +1,6 @@
 package dataaccess
 
 import (
-	"fmt"
-
 	"github.com/tjingsheng/jsask-forum-backend/internal/models"
 	"github.com/tjingsheng/jsask-forum-backend/internal/utils"
 	"gorm.io/gorm"
@@ -46,9 +44,7 @@ func CleanPostTags(db *gorm.DB) {
 	db.Model(&models.PostsTags{}).Pluck("post_id", &jPostIds)
 	postIdDiff := utils.SetDifference(jPostIds, postIds)
 	if len(postIdDiff) > 0 {
-		fmt.Println("hi")
 		db.Where("post_id IN (?)", postIdDiff).Delete(&models.PostsTags{})
-		fmt.Println(db.Where("post_id IN (?)", postIdDiff).Delete(&models.PostsTags{}))
 	}
 
 	var tagIds []int
