@@ -56,12 +56,12 @@ func PutPost(w http.ResponseWriter, req *http.Request) {
 	var request PutPostRequest
 	json.NewDecoder(req.Body).Decode(&request)
 	updatedPost := models.Post{
-		PostTitle:   request.PostTitle,
+		PostTitle:   utils.PostTitleFormatter(request.PostTitle),
 		PostContent: request.PostContent,
 	}
 
 	err := dataaccess.UpdatePost(database.DB, updatedPost, request.PostID)
-	dataaccess.CreateTags(database.DB, utils.CapitaliseAndRemoveDuplicates(request.Tags), request.PostID)
+	dataaccess.CreateTags(database.DB, utils.TagSliceFormatter(request.Tags), request.PostID)
 	response, _ := utils.HandlerFormatter(err, updatedPost, "PutPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
@@ -81,13 +81,13 @@ func PostPost(w http.ResponseWriter, req *http.Request) {
 	newPost := models.Post{
 		UserID:       request.UserID,
 		PostDatetime: time.Now().Format(constants.Go2PostgresqlDatetime),
-		PostTitle:    request.PostTitle,
+		PostTitle:    utils.PostTitleFormatter(request.PostTitle),
 		PostContent:  request.PostContent,
 		ParentPost:   request.ParentPost,
 	}
 
 	postId, err := dataaccess.CreatePost(database.DB, newPost)
-	dataaccess.CreateTags(database.DB, utils.CapitaliseAndRemoveDuplicates(request.Tags), postId)
+	dataaccess.CreateTags(database.DB, utils.TagSliceFormatter(request.Tags), postId)
 	response, _ := utils.HandlerFormatter(err, newPost, "PostPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
