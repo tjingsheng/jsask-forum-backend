@@ -5,3 +5,6 @@
 
 # Editor
 .vscode/*
+
+# vendor
+/vendor
