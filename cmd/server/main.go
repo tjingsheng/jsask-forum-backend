@@ -13,5 +13,5 @@ func main() {
 	port := os.Getenv("PORT")
 	r := router.Setup()
 	fmt.Print("Listening on: " + port)
-	log.Fatal(http.ListenAndServe(":"+port, r))
+	log.Fatal(http.ListenAndServe(":8000", r))
 }
