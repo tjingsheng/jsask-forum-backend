@@ -16,10 +16,12 @@ func GetAllTags(w http.ResponseWriter, req *http.Request) {
 	tags, err := dataaccess.ListTags(database.DB)
 	allTagsViewModel := make([]tagsviewmodel.ListView, len(tags))
 	allTagsView := make([]tagsview.ListView, len(tags))
+
 	for i := range tags {
 		allTagsViewModel[i] = tagsviewmodel.ListFrom(tags[i])
 		allTagsView[i] = tagsview.ListFrom(allTagsViewModel[i])
 	}
+
 	response, _ := utils.HandlerFormatter(err, allTagsView, "GetAllTags", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }

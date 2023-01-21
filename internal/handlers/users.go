@@ -16,8 +16,10 @@ import (
 func GetCurrUser(w http.ResponseWriter, req *http.Request) {
 	username := chi.URLParam(req, "username")
 	currUser, err := dataaccess.ListCurrUser(database.DB, utils.UsernameFormatter(username))
+
 	currUserViewModel := curruserviewmodel.ListFrom(currUser)
 	currUserView := curruserview.ListFrom(currUserViewModel)
+
 	response, _ := utils.HandlerFormatter(err, currUserView, "GetCurrUser", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }

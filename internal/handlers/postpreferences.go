@@ -13,7 +13,6 @@ import (
 )
 
 func PutPostPreference(w http.ResponseWriter, req *http.Request) {
-
 	type PostPreferenceRequest struct {
 		UserID     int `json:"currUserId"`
 		PostID     int `json:"currPostId"`

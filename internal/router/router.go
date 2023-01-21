@@ -9,8 +9,8 @@ import (
 func Setup() chi.Router {
 	r := chi.NewRouter()
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"https://*", "http://*", "http://localhost:3000"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedOrigins:   []string{"https://*", "http://*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
 		AllowCredentials: true,

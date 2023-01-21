@@ -21,10 +21,12 @@ func GetAllPosts(w http.ResponseWriter, req *http.Request) {
 	posts, err := dataaccess.ListPosts(database.DB)
 	allPostsViewModel := make([]postsviewmodel.ListView, len(posts))
 	allPostsView := make([]postsview.ListView, len(posts))
+
 	for i := range posts {
 		allPostsViewModel[i] = postsviewmodel.ListFrom(posts[i])
 		allPostsView[i] = postsview.ListFrom(allPostsViewModel[i], userId)
 	}
+
 	response, _ := utils.HandlerFormatter(err, allPostsView, "GetAllPosts", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }
@@ -35,10 +37,12 @@ func GetCurrPost(w http.ResponseWriter, req *http.Request) {
 	currPosts, err := dataaccess.ListCurrPost(database.DB, postId)
 	allCurrPostsViewModel := make([]postsviewmodel.ListView, len(currPosts))
 	allCurrPostsView := make([]postsview.ListView, len(currPosts))
+
 	for i := range currPosts {
 		allCurrPostsViewModel[i] = postsviewmodel.ListFrom(currPosts[i])
 		allCurrPostsView[i] = postsview.ListFrom(allCurrPostsViewModel[i], userId)
 	}
+
 	currPostView := currpostsview.ListFrom(allCurrPostsView)
 	response, _ := utils.HandlerFormatter(err, currPostView, "GetAllPosts", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
@@ -55,6 +59,7 @@ func PutPost(w http.ResponseWriter, req *http.Request) {
 
 	var request PutPostRequest
 	json.NewDecoder(req.Body).Decode(&request)
+
 	updatedPost := models.Post{
 		PostTitle:   utils.PostTitleFormatter(request.PostTitle),
 		PostContent: request.PostContent,
@@ -62,6 +67,7 @@ func PutPost(w http.ResponseWriter, req *http.Request) {
 
 	err := dataaccess.UpdatePost(database.DB, updatedPost, request.PostID)
 	dataaccess.CreateTags(database.DB, utils.TagSliceFormatter(request.Tags), request.PostID)
+
 	response, _ := utils.HandlerFormatter(err, updatedPost, "PutPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
@@ -78,6 +84,7 @@ func PostPost(w http.ResponseWriter, req *http.Request) {
 
 	var request PostNewPostRequest
 	json.NewDecoder(req.Body).Decode(&request)
+
 	newPost := models.Post{
 		UserID:       request.UserID,
 		PostDatetime: time.Now().Format(constants.Go2PostgresqlDatetime),
@@ -88,6 +95,7 @@ func PostPost(w http.ResponseWriter, req *http.Request) {
 
 	postId, err := dataaccess.CreatePost(database.DB, newPost)
 	dataaccess.CreateTags(database.DB, utils.TagSliceFormatter(request.Tags), postId)
+
 	response, _ := utils.HandlerFormatter(err, newPost, "PostPost", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
@@ -95,6 +103,7 @@ func PostPost(w http.ResponseWriter, req *http.Request) {
 func DeletePost(w http.ResponseWriter, req *http.Request) {
 	postId := chi.URLParam(req, "postId")
 	err := dataaccess.DeletePost(database.DB, postId)
+
 	response, _ := utils.HandlerFormatter(err, postId, "DeletePost", constants.SuccessfulDeleteMessage)
 	json.NewEncoder(w).Encode(response)
 }

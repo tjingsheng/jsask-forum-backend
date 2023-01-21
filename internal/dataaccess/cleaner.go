@@ -12,6 +12,7 @@ func UpdateTables(db *gorm.DB) {
 	CleanPostPreferences(db)
 }
 
+// Delete all tags that are not tagged to any post
 func CleanTags(db *gorm.DB) {
 	var tagIds []int
 	var jTagIds []int
@@ -23,6 +24,7 @@ func CleanTags(db *gorm.DB) {
 	}
 }
 
+// Delete all invalid post-tag entries i.e. if post/tag has been deleted
 func CleanPostTags(db *gorm.DB) {
 	var postIds []int
 	var jPostIds []int
@@ -43,6 +45,7 @@ func CleanPostTags(db *gorm.DB) {
 	}
 }
 
+// Delete all invalid postpreferences i.e. if post/user has been deleted
 func CleanPostPreferences(db *gorm.DB) {
 	var postIds []int
 	var jPostIds []int
@@ -61,5 +64,4 @@ func CleanPostPreferences(db *gorm.DB) {
 	if len(userIdDiff) > 0 {
 		db.Where("user_id IN (?)", userIdDiff).Delete(&models.PostPreference{})
 	}
-
 }
