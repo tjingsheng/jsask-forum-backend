@@ -7,7 +7,7 @@ import (
 
 func ListTags(db *gorm.DB) ([]models.Tag, error) {
 	var tag []models.Tag
-	result := db.Find(&tag)
+	result := db.Order("tag_name").Find(&tag)
 	return tag, result.Error
 }
 
