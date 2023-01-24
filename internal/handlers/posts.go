@@ -44,7 +44,7 @@ func GetCurrPost(w http.ResponseWriter, req *http.Request) {
 	}
 
 	currPostView := currpostsview.ListFrom(allCurrPostsView)
-	response, _ := utils.HandlerFormatter(err, currPostView, "GetAllPosts", constants.SuccessfulGetMessage)
+	response, _ := utils.HandlerFormatter(err, currPostView, "GetCurrPosts", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }
 

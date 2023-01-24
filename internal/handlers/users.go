@@ -36,7 +36,7 @@ func GetUserSalt(w http.ResponseWriter, req *http.Request) {
 	saltViewModel := saltviewmodel.ListFrom(currSalt)
 	saltView := saltview.ListFrom(saltViewModel)
 
-	response, _ := utils.HandlerFormatter(err, saltView, "GetCurrUser", constants.SuccessfulGetMessage)
+	response, _ := utils.HandlerFormatter(err, saltView, "GetUserSalt", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -59,6 +59,6 @@ func PostUser(w http.ResponseWriter, req *http.Request) {
 
 	err := dataaccess.CreateUser(database.DB, newUser)
 
-	response, _ := utils.HandlerFormatter(err, newUser, "PostCurrUser", constants.SuccessfulPostMessage)
+	response, _ := utils.HandlerFormatter(err, newUser, "PostUser", constants.SuccessfulPostMessage)
 	json.NewEncoder(w).Encode(response)
 }
