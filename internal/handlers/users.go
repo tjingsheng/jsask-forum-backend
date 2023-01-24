@@ -11,25 +11,25 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 	"github.com/tjingsheng/jsask-forum-backend/internal/models"
 	"github.com/tjingsheng/jsask-forum-backend/internal/utils"
-	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/curruserviewmodel"
 	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/saltviewmodel"
-	"github.com/tjingsheng/jsask-forum-backend/internal/views/curruserview"
+	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/userviewmodel"
 	"github.com/tjingsheng/jsask-forum-backend/internal/views/saltview"
+	"github.com/tjingsheng/jsask-forum-backend/internal/views/userview"
 )
 
-func GetCurrUser(w http.ResponseWriter, req *http.Request) {
+func GetUser(w http.ResponseWriter, req *http.Request) {
 	username := chi.URLParam(req, "username")
 	password := chi.URLParam(req, "password")
-	currUser, err := dataaccess.ListCurrUser(database.DB, utils.UsernameFormatter(username), password)
+	user, err := dataaccess.ListCurrUser(database.DB, utils.UsernameFormatter(username), password)
 
-	currUserViewModel := curruserviewmodel.ListFrom(currUser)
-	currUserView := curruserview.ListFrom(currUserViewModel)
+	userViewModel := userviewmodel.ListFrom(user)
+	userView := userview.ListFrom(userViewModel)
 
-	response, _ := utils.HandlerFormatter(err, currUserView, "GetCurrUser", constants.SuccessfulGetMessage)
+	response, _ := utils.HandlerFormatter(err, userView, "GetUser", constants.SuccessfulGetMessage)
 	json.NewEncoder(w).Encode(response)
 }
 
-func GetSalt(w http.ResponseWriter, req *http.Request) {
+func GetUserSalt(w http.ResponseWriter, req *http.Request) {
 	username := chi.URLParam(req, "username")
 	currSalt, err := dataaccess.ListSalt(database.DB, utils.UsernameFormatter(username))
 
@@ -40,7 +40,7 @@ func GetSalt(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func PostCurrUser(w http.ResponseWriter, req *http.Request) {
+func PostUser(w http.ResponseWriter, req *http.Request) {
 	type PostCurrUserRequest struct {
 		Username string `json:"username"`
 		Salt     string `json:"salt"`

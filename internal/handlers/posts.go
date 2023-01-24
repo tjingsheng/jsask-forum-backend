@@ -73,7 +73,7 @@ func PutPost(w http.ResponseWriter, req *http.Request) {
 }
 
 func PostPost(w http.ResponseWriter, req *http.Request) {
-	type PostNewPostRequest struct {
+	type PostPostRequest struct {
 		UserID      int    `json:"userId"`
 		PostTitle   string `json:"postTitle"`
 		PostContent string `json:"postContent"`
@@ -82,7 +82,7 @@ func PostPost(w http.ResponseWriter, req *http.Request) {
 		Tags []string `json:"tags"`
 	}
 
-	var request PostNewPostRequest
+	var request PostPostRequest
 	json.NewDecoder(req.Body).Decode(&request)
 
 	newPost := models.Post{

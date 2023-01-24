@@ -1,4 +1,4 @@
-package curruserviewmodel
+package userviewmodel
 
 import "github.com/tjingsheng/jsask-forum-backend/internal/models"
 

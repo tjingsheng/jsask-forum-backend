@@ -1,7 +1,7 @@
-package curruserview
+package userview
 
 import (
-	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/curruserviewmodel"
+	"github.com/tjingsheng/jsask-forum-backend/internal/viewmodels/userviewmodel"
 )
 
 type ListView struct {
@@ -10,7 +10,7 @@ type ListView struct {
 	UserDatetime string `json:"userDatetime"`
 }
 
-func ListFrom(user curruserviewmodel.ListView) ListView {
+func ListFrom(user userviewmodel.ListView) ListView {
 	return ListView{
 		ID:           user.ID,
 		Username:     user.Username,
