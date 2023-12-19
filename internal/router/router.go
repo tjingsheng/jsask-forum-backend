@@ -10,7 +10,7 @@ func Setup() chi.Router {
 	r := chi.NewRouter()
 	r.Use(cors.Handler(cors.Options{
 		// AllowedOrigins:   []string{"https://*", "http://*"},
-		AllowedOrigins:   []string{"https://www.jsask.online"},
+		AllowedOrigins:   []string{"https://www.jsask.online", "https://www.jsask.site"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
