@@ -1,58 +1,73 @@
 package main
 
 import (
-	"crypto/rand"
-	"crypto/sha512"
-	"encoding/hex"
+	"encoding/csv"
 	"fmt"
 	"log"
-	"time"
+	"os"
+	"reflect"
+	"strconv"
 
-	faker "github.com/go-faker/faker/v4"
 	"gorm.io/gorm"
 
 	"github.com/tjingsheng/jsask-forum-backend/internal/models"
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 )
 
-// TODO: Use brcypt instead of GenerateSalt and HashPassword
-func GenerateSalt() string {
-	salt := make([]byte, 16) 
-	_, err := rand.Read(salt)
-	if err != nil {
-		panic(err) 
-	}
-	return hex.EncodeToString(salt)
+func SeedUsers(db *gorm.DB, filename string) {
+  users, err := CSVToStruct[models.User](filename)
+  if err != nil {
+    log.Fatalf("Error converting CSV to struct: %v", err)
+  }
+
+  for _, user := range users {
+    if err := db.Create(&user).Error; err != nil {
+      log.Fatalf("Failed to insert user: %v", err)
+    }
+  }
+
+  fmt.Println("Successfully seeded users from CSV")
 }
 
-func HashPassword(salt, password string) string {
-	hasher := sha512.New()
-	hasher.Write([]byte(salt + password))
-	return hex.EncodeToString(hasher.Sum(nil))
+func CSVToStruct[T any](filename string) ([]T, error) {
+  file, err := os.Open(filename)
+  if err != nil {
+    return nil, fmt.Errorf("failed to open file: %v", err)
+  }
+  defer file.Close()
+
+  reader := csv.NewReader(file)
+  records, err := reader.ReadAll()
+  if err != nil {
+    return nil, fmt.Errorf("failed to read CSV: %v", err)
+  }
+
+  var result []T
+  structType := reflect.TypeOf(*new(T))
+
+  for _, record := range records {
+    obj := reflect.New(structType).Elem()
+
+    for i := 0; i < structType.NumField(); i++ {
+      field := obj.Field(i)
+
+      if field.Kind() == reflect.Int {
+        val, _ := strconv.Atoi(record[i])
+        field.SetInt(int64(val))
+      } else if field.Kind() == reflect.String {
+        field.SetString(record[i])
+      }
+    }
+
+    result = append(result, obj.Interface().(T))
+  }
+
+  return result, nil
 }
 
-func SeedUsers(db *gorm.DB, count int) {
-	for i := 0; i < count; i++ {
-		password := "1234"
-		salt := GenerateSalt()
-		hashedPassword := HashPassword(salt, password)
-
-		user := models.User{
-			Username:     faker.FirstName(),
-			UserDatetime: time.Now().Format("2006-01-02 15:04:05"),
-			Salt:         salt,
-			Password:     hashedPassword, 
-		}
-
-		if err := db.Create(&user).Error; err != nil {
-			log.Fatalf("failed to seed user: %v", err)
-		}
-	}
-	fmt.Println("Successfully seeded users")
-}
 
 func Seed(db *gorm.DB) {
-	SeedUsers(db, 10)
+	SeedUsers(db, "db/users.csv")
 }
 
 func main() {
