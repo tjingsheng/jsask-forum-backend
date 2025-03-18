@@ -5,8 +5,9 @@ import (
 	"github.com/tjingsheng/jsask-forum-backend/internal/handlers"
 )
 
-func GetRoutes() func(r chi.Router) {
-	return func(r chi.Router) {
+func Router() chi.Router {
+	r := chi.NewRouter()
+	r.Group(func(r chi.Router) {
 		r.Get("/user/{username}/{password}", handlers.GetUser)
 		r.Get("/user/{username}", handlers.GetUserSalt)
 		r.Post("/user", handlers.PostUser)
@@ -20,6 +21,6 @@ func GetRoutes() func(r chi.Router) {
 		r.Get("/tags", handlers.GetAllTags)
 
 		r.Put("/postpreference", handlers.PutPostPreference)
-
-	}
+	})
+	return r
 }

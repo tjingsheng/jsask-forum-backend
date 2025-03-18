@@ -5,11 +5,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/tjingsheng/jsask-forum-backend/internal/router"
+	"github.com/tjingsheng/jsask-forum-backend/internal/routes"
 )
 
 func main() {
-	r := router.Setup()
 	fmt.Print("Server is running on http://localhost:8000")
-	log.Fatal(http.ListenAndServe(":8000", r))
+	log.Fatal(http.ListenAndServe(":8000", routes.Router()))
 }
