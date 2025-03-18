@@ -1,12 +1,20 @@
 package routes
 
 import (
+	"net/http"
+
 	"github.com/go-chi/chi"
 	"github.com/tjingsheng/jsask-forum-backend/internal/handlers"
 )
 
 func Router() chi.Router {
 	r := chi.NewRouter()
+
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("healthy"))
+	})
+
 	r.Group(func(r chi.Router) {
 		r.Get("/user/{username}/{password}", handlers.GetUser)
 		r.Get("/user/{username}", handlers.GetUserSalt)
