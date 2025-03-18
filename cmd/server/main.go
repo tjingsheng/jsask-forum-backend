@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
-	"github.com/CVWO/sample-go-app/internal/router"
+	"github.com/tjingsheng/jsask-forum-backend/internal/router"
 )
 
 func main() {
+	port := os.Getenv("PORT")
 	r := router.Setup()
-	fmt.Print("Listening on port 8000 at http://localhost:8000!")
-
-	log.Fatalln(http.ListenAndServe(":8000", r))
+	fmt.Print("Listening on: " + port)
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }

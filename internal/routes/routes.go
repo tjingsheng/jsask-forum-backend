@@ -1,20 +1,25 @@
 package routes
 
 import (
-	"encoding/json"
-	"net/http"
-
-	"github.com/CVWO/sample-go-app/internal/handlers/users"
 	"github.com/go-chi/chi"
+	"github.com/tjingsheng/jsask-forum-backend/internal/handlers"
 )
 
 func GetRoutes() func(r chi.Router) {
 	return func(r chi.Router) {
-		r.Get("/users", func(w http.ResponseWriter, req *http.Request) {
-			response, _ := users.HandleList(w, req)
+		r.Get("/user/{username}/{password}", handlers.GetUser)
+		r.Get("/user/{username}", handlers.GetUserSalt)
+		r.Post("/user", handlers.PostUser)
 
-			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(response)
-		})
+		r.Get("/post/{userId}/{postId}", handlers.GetCurrPost)
+		r.Get("/post/{userId}", handlers.GetAllPosts)
+		r.Post("/post", handlers.PostPost)
+		r.Put("/post", handlers.PutPost)
+		r.Delete("/post/{postId}", handlers.DeletePost)
+
+		r.Get("/tags", handlers.GetAllTags)
+
+		r.Put("/postpreference", handlers.PutPostPreference)
+
 	}
 }
