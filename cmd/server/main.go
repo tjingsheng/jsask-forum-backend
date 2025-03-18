@@ -10,6 +10,6 @@ import (
 
 func main() {
 	r := router.Setup()
-	fmt.Print("Server is running on http://localhost:3000")
-	log.Fatal(http.ListenAndServe(":3000", r))
+	fmt.Print("Server is running on http://localhost:8000")
+	log.Fatal(http.ListenAndServe(":8000", r))
 }
