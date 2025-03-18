@@ -1,20 +1,122 @@
-# Jing Sheng CVWO Winter Assignment
+# Jsask Forum Backend
 
-## Background
+The backend of my first web application!
 
-Computing for Voluntary Welfare Organisations (CVWO) is an initiative founded by Dr Ben Leong and spearheaded by undergraduates from the National University of Singapore (NUS) School of Computing (SoC). CVWO's mission is to build IT systems that help their partner VWOs serve the community more effectively.
+## Prerequisites
 
-View more at:
-https://www.comp.nus.edu.sg/~vwo/
+Ensure you have the following installed:
 
-## Introduction
+- [Go](https://go.dev/dl/)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [GNU Make](https://www.gnu.org/software/make/) \*optional
 
-As part of CVWO's AY2022/23 committee recruitment, freshmen from the NUS SOC are tasked to make a simple web forum.
+## Setup
 
-## Designed and Implemented By
+Clone the repository and navigate into the project directory:
 
-Tan Jing Sheng  
-A0253492B  
-First-Year Undergraduate  
-NUS Computer Science  
-2022
+```sh
+git clone https://github.com/tjingsheng/jsask-forum-backend
+cd jsask-forum-backend
+```
+
+Copy the environment file:
+
+```sh
+cp .env.example .env
+```
+
+Install Go dependencies:
+
+```sh
+go mod tidy
+```
+
+## Makefile Commands
+
+The following commands help manage the backend.
+
+### Start Development Server
+
+```sh
+make dev
+```
+
+### Start Docker Services
+
+```sh
+make docker
+```
+
+### Run Database Migrations
+
+```sh
+make migrate
+```
+
+### Seed the Database
+
+```sh
+make seed
+```
+
+### Reset Database
+
+```sh
+make reset
+```
+
+### Build the Application
+
+```sh
+make build
+```
+
+### Run the Compiled Build
+
+```sh
+make start
+```
+
+## Running Without Makefile
+
+If you don’t want to use `make`, you can run commands manually:
+
+### Start the Server
+
+```sh
+go run cmd/server/main.go
+```
+
+### Run Migrations
+
+```sh
+go run cmd/migrate/main.go
+```
+
+### Seed the Database
+
+```sh
+go run cmd/seed/main.go
+```
+
+### Reset the Database
+
+```sh
+docker exec -i jsask-postgres psql -U postgres -d jsask -c "DROP SCHEMA IF EXISTS public CASCADE; CREATE SCHEMA public; GRANT ALL ON SCHEMA public TO postgres; GRANT ALL ON SCHEMA public TO public;"
+```
+
+### Build the Application
+
+```sh
+go build -o bin/server cmd/server/main.go
+```
+
+### Run the Built Binary
+
+```sh
+./bin/server
+```
+
+---

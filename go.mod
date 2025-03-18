@@ -4,9 +4,8 @@ go 1.18
 
 require (
 	github.com/go-chi/chi v1.5.4
-	github.com/go-chi/cors v1.2.1
 	github.com/joho/godotenv v1.4.0
-	golang.org/x/text v0.6.0
+	golang.org/x/text v0.18.0
 	gorm.io/driver/postgres v1.4.5
 	gorm.io/gorm v1.24.2
 )
