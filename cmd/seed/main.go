@@ -10,8 +10,8 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/tjingsheng/jsask-forum-backend/internal/models"
 	"github.com/tjingsheng/jsask-forum-backend/internal/database"
+	"github.com/tjingsheng/jsask-forum-backend/internal/models"
 )
 
 func seedData[T any](db *gorm.DB, filename string) {
@@ -66,15 +66,14 @@ func csvToStruct[T any](filename string) ([]T, error) {
 }
 
 func seed(db *gorm.DB) {
-	seedData[models.User](db, "db/users.csv")
-	seedData[models.Post](db, "db/posts.csv")
-	seedData[models.PostPreference](db, "db/post_preferences.csv")
-	seedData[models.PostsTags](db, "db/posts_tags.csv")
-	seedData[models.Tag](db, "db/tags.csv")
+	seedData[models.User](db, "seed/users.csv")
+	seedData[models.Post](db, "seed/posts.csv")
+	seedData[models.PostPreference](db, "seed/post_preferences.csv")
+	seedData[models.PostsTags](db, "seed/posts_tags.csv")
+	seedData[models.Tag](db, "seed/tags.csv")
 }
 
 func main() {
 	db := database.InitDB()
 	seed(db)
 }
- 
