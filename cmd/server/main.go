@@ -6,10 +6,12 @@ import (
 	"os"
 
 	"github.com/go-chi/chi"
+	"github.com/tjingsheng/jsask-forum-backend/internal/database"
 	"github.com/tjingsheng/jsask-forum-backend/internal/routes"
 )
 
 func main() {
+	database.InitDB()
 	port := "8000"
 	if val, ok := os.LookupEnv("FUNCTIONS_CUSTOMHANDLER_PORT"); ok {
 		port = val

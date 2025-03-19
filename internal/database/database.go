@@ -3,22 +3,30 @@ package database
 import (
 	"log"
 	"os"
+	"sync"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-var DB = InitDB()
+var (
+	DB   *gorm.DB
+	once sync.Once
+)
 
-func InitDB() *gorm.DB {
-	godotenv.Load(".env")
-	DB_URL := os.Getenv("DB_URL")
-	db, err := gorm.Open(postgres.Open(DB_URL), &gorm.Config{})
+func InitDB() {
+	once.Do(func() {
+		godotenv.Load(".env")
+		DB_URL := os.Getenv("DB_URL")
 
-	if err != nil {
-		log.Fatalln(err)
-	}
+		var err error
+		DB, err = gorm.Open(postgres.Open(DB_URL), &gorm.Config{
+			PrepareStmt: false,
+		})
 
-	return db
+		if err != nil {
+			log.Fatalln(err)
+		}
+	})
 }

@@ -128,18 +128,16 @@ func seed(db *gorm.DB) {
 }
 
 func main() {
-	db := database.InitDB()
+	database.InitDB()
+	seed(database.DB)
 
-	seed(db)
-
-	sqlDB, err := db.DB()
+	sqlDB, err := database.DB.DB()
 	if err != nil {
-		log.Fatalf("Failed to retrieve database connection: %v", err)
+		log.Fatalf("Error getting database connection: %v", err)
 	}
-
-	if err := sqlDB.Close(); err != nil {
-		log.Fatalf("Failed to close database connection: %v", err)
-	} else {
-		fmt.Println("Database connection closed successfully after seeding.")
-	}
+	defer func() {
+		if err := sqlDB.Close(); err != nil {
+			log.Fatalf("Error closing database connection: %v", err)
+		}
+	}()
 }

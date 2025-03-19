@@ -17,7 +17,7 @@ func enableRLS(db *gorm.DB, tableName string) {
 	}
 }
 
-func Migrate(db *gorm.DB) {
+func migrate(db *gorm.DB) {
 	db.Exec("DEALLOCATE ALL;")
 
 	err := db.AutoMigrate(
@@ -52,6 +52,16 @@ func Migrate(db *gorm.DB) {
 }
 
 func main() {
-	db := database.InitDB()
-	Migrate(db)
+	database.InitDB()
+	migrate(database.DB)
+
+	sqlDB, err := database.DB.DB()
+	if err != nil {
+		log.Fatalf("Error getting database connection: %v", err)
+	}
+	defer func() {
+		if err := sqlDB.Close(); err != nil {
+			log.Fatalf("Error closing database connection: %v", err)
+		}
+	}()
 }
