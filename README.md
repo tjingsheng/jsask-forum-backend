@@ -73,7 +73,7 @@ make reset
 make build
 ```
 
-### Run the Compiled Build
+### Run the Compiled Build (For MacOS)
 
 ```sh
 make start
@@ -109,14 +109,22 @@ docker exec -i jsask-postgres psql -U postgres -d jsask -c "DROP SCHEMA IF EXIST
 
 ### Build the Application
 
+For MacOS
+
 ```sh
 go build -o bin/server cmd/server/main.go
 ```
 
+For Windows / Azure Function:
+
+```sh
+GOOS=windows GOARCH=amd64 go build -o bin/server.exe cmd/server/main.go
+```
+
 ### Run the Built Binary
+
+For MacOS
 
 ```sh
 ./bin/server
 ```
-
----
